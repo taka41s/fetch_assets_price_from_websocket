@@ -9,29 +9,36 @@
       action={@live_action}
       stock={@stock}
       return_to={Routes.stock_index_path(@socket, :index)}
+      
     />
   </.modal>
 <% end %>
 
-<table>
+<span><%= live_patch "New Stock", to: Routes.stock_index_path(@socket, :new) %></span>
+
+<table class="table table-dark">
   <thead>
     <tr>
-
-      <th></th>
+      <th scope="col">Ticker</th>
+      <th scope="col">Open</th>
+      <th scope="col">Close</th>
+      <th scope="col">High</th>
+      <th scope="col">Low</th>
+      <th scope="col">Volume</th>
     </tr>
   </thead>
-  <tbody id="stocks">
+  <tbody>
     <%= for stock <- @stocks do %>
-      <tr id={"stock-#{stock.id}"}>
-
-        <td>
-          <span><%= live_redirect "Show", to: Routes.stock_show_path(@socket, :show, stock) %></span>
-          <span><%= live_patch "Edit", to: Routes.stock_index_path(@socket, :edit, stock) %></span>
-          <span><%= link "Delete", to: "#", phx_click: "delete", phx_value_id: stock.id, data: [confirm: "Are you sure?"] %></span>
-        </td>
+      <tr>
+        <td><%= stock.ticker %></td>
+        <td><%= stock.open %></td>
+        <td><%= stock.close %></td>
+        <td><%= stock.high %></td>
+        <td><%= stock.low %></td>
+        <td><%= stock.volume %></td>
       </tr>
-    <% end %>
+    <%end%>
   </tbody>
 </table>
 
-<span><%= live_patch "New Stock", to: Routes.stock_index_path(@socket, :new) %></span>
+

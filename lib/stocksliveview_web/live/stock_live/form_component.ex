@@ -1,6 +1,5 @@
 defmodule StocksliveviewWeb.StockLive.FormComponent do
   use StocksliveviewWeb, :live_component
-
   alias Stocksliveview.Assets
 
   @impl true

@@ -50,7 +50,16 @@
   cursor: wait;
 }
 
+td {
+  font-size: 15px;
+}
+
+th {
+  font-size: 15px;
+}
+
 .phx-modal {
+  size: 50%;
   opacity: 1!important;
   position: fixed;
   z-index: 1;

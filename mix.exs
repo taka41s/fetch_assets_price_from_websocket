@@ -50,7 +50,8 @@ defmodule Stocksliveview.MixProject do
       {:jason, "~> 1.2"},
       {:plug_cowboy, "~> 2.5"},
       {:httpoison, "~> 1.8"},
-      {:poison, "~> 3.0"}
+      {:poison, "~> 3.0"},
+      {:pry, "~> 0.1.0", only: :dev}
     ]
   end
 
