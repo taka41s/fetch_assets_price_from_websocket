@@ -11,6 +11,7 @@ defmodule Stocksliveview.Assets.Stock do
     field :high, :float
     field :low, :float
     field :volume, :float
+    field :date, :date
     timestamps()
   end
 
