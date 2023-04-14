@@ -1,8 +1,8 @@
-defmodule PolygonApi do
+defmodule PolygonApi.Historical do
   require Logger
   require HTTPoison
 
-  def get_last_trade(ticker, date) do
+  def get_stock_info_by_date(ticker, date) do
     url = "https://api.polygon.io/v1/open-close/#{ticker}/#{date}?adjusted=true&apiKey=ogKoJqWTjDIkOTLdVpPsJv9pbkwjNuOv"
 
     case HTTPoison.get(url) do

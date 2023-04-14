@@ -51,7 +51,10 @@ defmodule Stocksliveview.MixProject do
       {:plug_cowboy, "~> 2.5"},
       {:httpoison, "~> 1.8"},
       {:poison, "~> 3.0"},
-      {:pry, "~> 0.1.0", only: :dev}
+      {:pry, "~> 0.1.0", only: :dev},
+      {:oban, "~> 2.14"},
+      {:dotenv, "~> 2.0"},
+      {:websockex, "~> 0.4.3"}
     ]
   end
 

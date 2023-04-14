@@ -17,6 +17,11 @@ config :stocksliveview, StocksliveviewWeb.Endpoint,
   pubsub_server: Stocksliveview.PubSub,
   live_view: [signing_salt: "o3eW/uVu"]
 
+config :stocksliveview, Oban,
+  repo: Stocksliveview.Repo,
+  plugins: [Oban.Plugins.Pruner],
+  queues: [default: 10]
+
 # Configures the mailer
 #
 # By default it uses the "Local" adapter which stores the emails
