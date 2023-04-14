@@ -1,0 +1,37 @@
+<h1>Listing Stocks</h1>
+
+<%= if @live_action in [:new, :edit] do %>
+  <.modal return_to={Routes.stock_index_path(@socket, :index)}>
+    <.live_component
+      module={StocksliveviewWeb.StockLive.FormComponent}
+      id={@stock.id || :new}
+      title={@page_title}
+      action={@live_action}
+      stock={@stock}
+      return_to={Routes.stock_index_path(@socket, :index)}
+    />
+  </.modal>
+<% end %>
+
+<table>
+  <thead>
+    <tr>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody id="stocks">
+    <%= for stock <- @stocks do %>
+      <tr id={"stock-#{stock.id}"}>
+
+        <td>
+          <span><%= live_redirect "Show", to: Routes.stock_show_path(@socket, :show, stock) %></span>
+          <span><%= live_patch "Edit", to: Routes.stock_index_path(@socket, :edit, stock) %></span>
+          <span><%= link "Delete", to: "#", phx_click: "delete", phx_value_id: stock.id, data: [confirm: "Are you sure?"] %></span>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<span><%= live_patch "New Stock", to: Routes.stock_index_path(@socket, :new) %></span>
