@@ -1,0 +1,32 @@
+<div>
+  <h2><%= @title %></h2>
+
+  <.form
+    let={f}
+    for={@changeset}
+    id="asset-form"
+    phx-target={@myself}
+    phx-change="validate"
+    phx-submit="save">
+
+    <div>
+      <%= label f, :name %>
+      <%= text_input f, :name %>
+    </div>
+
+    <div>
+      <%= label f, :ticker %>
+      <%= text_input f, :ticker %>
+    </div>
+
+    <div>
+      <%= label f, :type %>
+      <%= text_input f, :type %>
+    </div>
+    
+  
+    <div>
+      <%= submit "Save", phx_disable_with: "Saving..." %>
+    </div>
+  </.form>
+</div>

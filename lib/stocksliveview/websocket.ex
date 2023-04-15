@@ -20,7 +20,7 @@ defmodule Stocksliveview.Websocket do
 
   @impl true
   def handle_info(:subscribe, state) do
-    payload = %{"action" => "subscribe", "params" => %{"symbols" => "AAPL"}}
+    payload = %{"action" => "subscribe", "params" => %{"symbols" => "AAPL,BTC/USD"}}
 
     subscribe = Jason.encode!(payload)
 

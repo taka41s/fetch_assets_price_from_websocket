@@ -13,9 +13,9 @@ defmodule StocksliveviewWeb.StockLive.Show do
     {:noreply,
      socket
      |> assign(:page_title, page_title(socket.assigns.live_action))
-     |> assign(:stock, Assets.get_stock!(id))}
+     |> assign(:Asset, Assets.get_Asset!(id))}
   end
 
-  defp page_title(:show), do: "Show Stock"
-  defp page_title(:edit), do: "Edit Stock"
+  defp page_title(:show), do: "Show Asset"
+  defp page_title(:edit), do: "Edit Asset"
 end

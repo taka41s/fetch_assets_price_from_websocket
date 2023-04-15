@@ -1,12 +1,12 @@
-defmodule StocksliveviewWeb.StockLive.Index do
+defmodule StocksliveviewWeb.AssetLive.Index do
   use StocksliveviewWeb, :live_view
 
   alias Stocksliveview.Assets
-  alias Stocksliveview.Assets.Stock
+  alias Stocksliveview.Assets.Asset
 
   @impl true
   def mount(_params, _session, socket) do
-    {:ok, assign(socket, :stocks, list_stocks())}
+    {:ok, assign(socket, :assets, list_assets())}
   end
 
   @impl true
@@ -16,31 +16,31 @@ defmodule StocksliveviewWeb.StockLive.Index do
 
   defp apply_action(socket, :edit, %{"id" => id}) do
     socket
-    |> assign(:page_title, "Edit Stock")
-    |> assign(:stock, Assets.get_stock!(id))
+    |> assign(:page_title, "Edit asset")
+    |> assign(:asset, Assets.get_asset!(id))
   end
 
   defp apply_action(socket, :new, _params) do
     socket
-    |> assign(:page_title, "New Stock")
-    |> assign(:stock, %Stock{})
+    |> assign(:page_title, "New asset")
+    |> assign(:asset, %Asset{})
   end
 
   defp apply_action(socket, :index, _params) do
     socket
-    |> assign(:page_title, "Listing Stocks")
-    |> assign(:stock, nil)
+    |> assign(:page_title, "Listing assets")
+    |> assign(:asset, nil)
   end
 
   @impl true
   def handle_event("delete", %{"id" => id}, socket) do
-    stock = Assets.get_stock!(id)
-    {:ok, _} = Assets.delete_stock(stock)
+    asset = Assets.get_asset!(id)
+    {:ok, _} = Assets.delete_asset(asset)
 
-    {:noreply, assign(socket, :stocks, list_stocks())}
+    {:noreply, assign(socket, :assets, list_assets())}
   end
 
-  defp list_stocks do
-    Assets.list_stocks()
+  defp list_assets do
+    Assets.list_assets()
   end
 end

@@ -1,0 +1,21 @@
+<h1>Show Asset</h1>
+
+<%= if @live_action in [:edit] do %>
+  <.modal return_to={Routes.asset_show_path(@socket, :show, @asset)}>
+    <.live_component
+      module={StocksliveviewWeb.AssetLive.FormComponent}
+      id={@asset.id}
+      title={@page_title}
+      action={@live_action}
+      asset={@asset}
+      return_to={Routes.asset_show_path(@socket, :show, @asset)}
+    />
+  </.modal>
+<% end %>
+
+<ul>
+
+</ul>
+
+<span><%= live_patch "Edit", to: Routes.asset_show_path(@socket, :edit, @asset), class: "button" %></span> |
+<span><%= live_redirect "Back", to: Routes.asset_index_path(@socket, :index) %></span>

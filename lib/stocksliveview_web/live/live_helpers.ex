@@ -4,25 +4,6 @@ defmodule StocksliveviewWeb.LiveHelpers do
 
   alias Phoenix.LiveView.JS
 
-  @doc """
-  Renders a live component inside a modal.
-
-  The rendered modal receives a `:return_to` option to properly update
-  the URL when the modal is closed.
-
-  ## Examples
-
-      <.modal return_to={Routes.stock_index_path(@socket, :index)}>
-        <.live_component
-          module={StocksliveviewWeb.StockLive.FormComponent}
-          id={@stock.id || :new}
-          title={@page_title}
-          action={@live_action}
-          return_to={Routes.stock_index_path(@socket, :index)}
-          stock: @stock
-        />
-      </.modal>
-  """
   def modal(assigns) do
     assigns = assign_new(assigns, :return_to, fn -> nil end)
 

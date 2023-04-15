@@ -3,7 +3,6 @@ defmodule Stocksliveview.Assets.Stock do
   import Ecto.Changeset
 
   schema "stocks" do
-    field :ticker, :string
     field :price, :integer
     field :open, :float
     field :close, :float
@@ -12,6 +11,8 @@ defmodule Stocksliveview.Assets.Stock do
     field :low, :float
     field :volume, :float
     field :date, :date
+    belongs_to :asset, Asset
+
     timestamps()
   end
 

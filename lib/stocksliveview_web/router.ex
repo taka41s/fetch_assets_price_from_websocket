@@ -16,11 +16,11 @@ defmodule StocksliveviewWeb.Router do
 
   scope "/", StocksliveviewWeb do
     pipe_through :browser
-    live "/", StockLive.Index, :index
-    live "/stocks/new", StockLive.Index, :new
-    live "/stocks/:id/edit", StockLive.Index, :edit
-    live "/stocks/:id", StockLive.Show, :show
-    live "/stocks/:id/show/edit", StockLive.Show, :edit
+    live "/", AssetLive.Index, :index
+    live "/assets/new", AssetLive.Index, :new
+    live "/assets/:id/edit", AssetLive.Index, :edit
+    live "/assets/:id", AssetLive.Show, :show
+    live "/assets/:id/show/edit", AssetLive.Show, :edit
   end
 
   # Other scopes may use custom stacks.
