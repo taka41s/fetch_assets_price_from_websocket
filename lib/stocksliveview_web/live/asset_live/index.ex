@@ -2,7 +2,7 @@ defmodule StocksliveviewWeb.AssetLive.Index do
   use StocksliveviewWeb, :live_view
 
   alias Stocksliveview.Assets
-  alias Stocksliveview.Assets.Asset
+  alias Stocksliveview.Asset
 
   @impl true
   def mount(_params, _session, socket) do

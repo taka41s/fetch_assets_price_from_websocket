@@ -20,6 +20,7 @@
     <thead>
       <tr>
         <th scope="col">Ticker</th>
+        <th scope="col">Current Price</th>
         <th scope="col">Open</th>
         <th scope="col">Close</th>
         <th scope="col">High</th>
@@ -31,11 +32,12 @@
       <%= for asset <- @assets do %>
         <tr>
           <td><%= asset.ticker %></td>
-          <td><%= asset.ticker %></td>
-          <td><%= asset.ticker %></td>
-          <td><%= asset.ticker %></td>
-          <td><%= asset.ticker %></td>
-          <td><%= asset.ticker %></td>
+          <td><%= asset.price %></td>
+          <td><%= asset.open %></td>
+          <td><%= asset.close %></td>
+          <td><%= asset.high %></td>
+          <td><%= asset.low %></td>
+          <td><%= asset.volume %></td>
         </tr>
       <%end%>
     </tbody>
