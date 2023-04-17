@@ -19,25 +19,21 @@ defmodule Stocksliveview.Websocket do
   def handle_frame({:text, data}, state) do
     response = Jason.decode!(data)
 
-    case {:ok, %{price: response["price"], ticker: response["symbol"]}} do
-      {:ok, %{ticker: ""}} ->
-        Logger.warn("Empty ticker value received")
-        :ok
+    case %{price: response["price"], ticker: response["symbol"]} do
+      %{ticker: ""} ->
+        {:error, :ticker_invalid}
 
-      {:ok, %{price: price, ticker: ticker}} ->
+      %{price: price, ticker: ticker} ->
         asset = Stocksliveview.Assets.find_by_ticker(ticker)
         case asset do
           %Stocksliveview.Asset{} = asset ->
             asset
             |> Stocksliveview.Assets.update_asset(%{price: price})
-            :ok
           nil ->
-            Logger.warn("No asset found for ticker: #{ticker}")
-            :ok
+            {:error, nil}
         end
       _ ->
-        Logger.warn("Invalid message received: #{inspect(response)}")
-        :ok
+        {:error, response}
     end
 
         # Stocksliveview.Assets.update_asset(asset, %{price: data[:price]})
