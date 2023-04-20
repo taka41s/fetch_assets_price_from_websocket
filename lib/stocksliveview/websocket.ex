@@ -4,13 +4,13 @@ defmodule Stocksliveview.Websocket do
   use WebSockex
   require Logger
   require IO
-  @url "wss://ws.twelvedata.com/v1/quotes/price?apikey=e4513687adf14e1090772c0db481c38a"
+  api_key = System.get_env("TWELVE_DATA_API_KEY")
+  @url "wss://ws.twelvedata.com/v1/quotes/price?apikey=#{api_key}"
 
   def start_link(_), do: WebSockex.start_link(@url, __MODULE__, nil)
 
   @impl true
   def handle_connect(_conn, state) do
-    # Logger.info("Connected...")
     send(self(), :subscribe)
     {:ok, state}
   end
@@ -18,7 +18,7 @@ defmodule Stocksliveview.Websocket do
   @impl true
   def handle_frame({:text, data}, state) do
     response = Jason.decode!(data)
-
+    Logger.info(response)
     case %{price: response["price"], ticker: response["symbol"]} do
       %{ticker: ""} ->
         {:error, :ticker_invalid}
@@ -36,14 +36,13 @@ defmodule Stocksliveview.Websocket do
         {:error, response}
     end
 
-        # Stocksliveview.Assets.update_asset(asset, %{price: data[:price]})
-
     {:ok, state}
   end
 
   @impl true
   def handle_info(:subscribe, state) do
-    payload = %{"action" => "subscribe", "params" => %{"symbols" => "BTC/USD"}}
+    assets = Stocksliveview.Assets.fetch_all_assets
+    payload = %{"action" => "subscribe", "params" => %{"symbols" => assets}}
 
     subscribe = Jason.encode!(payload)
 

@@ -31,10 +31,6 @@ defmodule Stocksliveview.Assets do
     asset
     |> Asset.changeset(attrs)
     |> Repo.update()
-
-    Ecto.PubSub.broadcast(Stocksliveview.Repo, "assets", asset)
-
-    asset
   end
   # def update_asset(asset, params) do
   #   IO.puts("Updating asset #{inspect(asset)} with params #{inspect(params)}")
@@ -48,6 +44,30 @@ defmodule Stocksliveview.Assets do
 
   def delete_asset(%Asset{} = asset) do
     Repo.delete(asset)
+  end
+
+  def fetch_cryptos do
+    Asset
+    |> select([p], %{symbol: p.ticker, price: p.price})
+    |> where([p], p.type == ^to_string('Crypto'))
+    |> Repo.all()
+    |> Enum.map(fn %{symbol: symbol} -> %{symbol: "#{symbol}/USD"} end)
+  end
+
+  def fetch_stocks do
+    Asset
+    |> select([p], %{symbol: p.ticker})
+    |> where([p], p.type == ^to_string('Stock'))
+    |> Repo.all()
+  end
+
+  def fetch_all_assets do
+    cryptos = fetch_cryptos()
+    stocks = fetch_stocks()
+
+    all_assets = cryptos ++ stocks
+
+    |> Enum.map(fn x -> Map.values(x) end) |> Enum.join(",")
   end
 
   def change_asset(%Asset{} = asset, attrs \\ %{}) do

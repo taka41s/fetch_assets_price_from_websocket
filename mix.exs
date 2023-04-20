@@ -52,7 +52,7 @@ defmodule Stocksliveview.MixProject do
       {:poison, "~> 3.0"},
       {:pry, "~> 0.1.0", only: :dev},
       {:oban, "~> 2.14"},
-      {:dotenv, "~> 2.0"},
+      {:dotenv, "~> 3.0.0", only: [:dev, :test]},
       {:websockex, "~> 0.4.3"}
     ]
   end
