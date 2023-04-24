@@ -9,23 +9,23 @@
     phx-change="validate"
     phx-submit="save">
 
-    <div>
+    <div class="input-modal col-6">
       <%= label f, :name %>
       <%= text_input f, :name %>
     </div>
 
-    <div>
+    <div class="input-modal col-6">
       <%= label f, :ticker %>
       <%= text_input f, :ticker %>
     </div>
 
-    <div>
+    <div class="input-modal col-6">
       <%= label f, :type %>
       <%= text_input f, :type %>
     </div>
     
   
-    <div>
+    <div class="input-modal col-6">
       <%= submit "Save", phx_disable_with: "Saving..." %>
     </div>
   </.form>

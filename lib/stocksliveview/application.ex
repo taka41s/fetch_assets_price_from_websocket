@@ -12,6 +12,7 @@ defmodule Stocksliveview.Application do
     children = [
       # Start the Ecto repository
       Stocksliveview.Repo,
+      {Phoenix.PubSub, name: :assets},
       Stocksliveview.Websocket,
       # Start the Telemetry supervisor
       StocksliveviewWeb.Telemetry,
